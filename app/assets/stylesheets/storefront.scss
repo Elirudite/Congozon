@@ -1,9 +1,9 @@
-.center {
+/*.center {
 	margin: auto;
 	width: 100%;
   padding: 5px 30%;
   text-align: center;
-}
+}*/
 
 /*.center .modal {
 	width: 50%;
@@ -14,10 +14,14 @@
 	height: 280px;
 }
 
+.center-it {
+	text-align: center;
+}
+
 .q-info-btn {
 	position: absolute;
   top: 260px;
-  left: 20px;
+  left: 0px;
   width: 200px;
   height: 100px;
 }

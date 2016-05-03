@@ -1,27 +1,39 @@
 class CartController < ApplicationController
 
+	include CartHelper
+
 	before_filter :authenticate_user!, except: [:add_to_cart, :view_order]
 
   def add_to_cart
   	product = Product.find(params[:product_id])
 
-		if product.quantity < params[:quantity].to_i
-			redirect_to product, notice: "Sorry, only #{product.quantity} left in stock."
-		elsif params[:quantity].to_i <= 0
-			redirect_to product, notice: "Sorry, this is the euclidean universe... you may be looking for the sass-backwards-verse in the dimension to your left."
-		else
+  	if quantity_check?(product, params[:quantity].to_i)
+  		return
+		else 
 			line_item = LineItem.create(product_id: params[:product_id], quantity: params[:quantity])
 
 			line_item.line_item_total = line_item.quantity * line_item.product.price
 			line_item.save
 
-			redirect_to root_path
+			redirect_to root_path 
 		end
   end
 
   def remove_from_cart
   	LineItem.find(params[:id]).destroy
-  	redirect_to :back
+  	redirect_to :back #or :view_order_path
+  end
+
+  def edit_line_item
+  	line_item = LineItem.find(params[:id])
+
+		if quantity_check?(line_item.product, params[:quantity].to_i)
+			return
+		else 
+			line_item.update(quantity: params[:quantity].to_i)
+			redirect_to :back #or :view_order_path
+		end
+
   end
 
   def view_order
