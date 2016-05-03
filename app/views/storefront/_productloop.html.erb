@@ -2,11 +2,11 @@
 	<% @products.each do |product| %>
 		<div class="col-md-4">
 			<div class="well">
-				<p><%= image_tag product.image.url, width: "100" %></p>
-				<p><%= product.name %></p>
-				<p><%= number_to_currency product.price %></p>
+				<p class="center image"><%= image_tag product.image.url, width: "100" %></p>
+				<p class="center"><%= product.name %></p>
+				<p class="center"><%= number_to_currency product.price %></p>
 
-				<p>
+				<p class="q-info-btn">
 					<a href="#" data-toggle="modal" data-target="#myModal_<%= product.id %>">
 						<span class="glyphicon glyphicon-plus"></span> Quick Info
 					</a>
@@ -24,10 +24,10 @@
 		        </h4>
 		      </div>
 		      <div class="modal-body">
-		        <p><%= image_tag product.image.url, width: "50" %></p>
-		        <p><%= number_to_currency product.price %></p>
-		        <p><%= product.brand %></p>
-		        <p><%= product.description %></p>
+		        <p class="center"><%= image_tag product.image.url, width: "50%", height: "25%" %></p>
+		        <p class="center"><%= number_to_currency product.price %></p>
+		        <p class="center"><%= product.brand %></p>
+		        <p class="center"><%= product.description %></p>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-primary">Add to Cart</button>
