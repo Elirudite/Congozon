@@ -1,0 +1,20 @@
+<h2>My Cart</h2>
+
+<div>
+  <% @line_items.each do |line_item| %>
+		  <h4><%= line_item.product.name %></h4>
+		<ul>
+			<li><%= number_to_currency line_item.product.price %></li>
+			<li>Qty: <%= line_item.quantity %></li>
+			<li>Subtotal: <%= line_item.line_item_total %></li>
+		</ul>
+		<p>
+			<button class="btn btn-warning">Edit</button>
+			<%= link_to "Remove from Cart", remove_from_cart_path(id: line_item.id), class: "btn btn-danger" %>
+		</p>
+  <% end %>
+</div>
+
+<div>
+    <%= link_to "Proceed to Checkout?", checkout_path, class: "btn btn-success" %>
+</div>
