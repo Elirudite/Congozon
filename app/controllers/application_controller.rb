@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     @brands = Product.pluck(:brand).sort.uniq!
   end
 
+  def remote_ip
+    if request.remote_ip == '127.0.0.1'
+      "#{ENV}['my_url]" # hard coded remote address.. for test only
+    else
+      request.remote_ip
+    end
+  end
+
  protected
 
  	def configure_permitted_parameters

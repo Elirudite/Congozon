@@ -1,0 +1,18 @@
+<% if current_user.role == "admin" %>
+	<h1>Manage Users</h1>
+
+	<% @users.each do |user| %>
+		<p>
+			<%= user.email %><br />
+			<%= user.role %>
+			<% if user.role == "guest" %>
+				<%= link_to "Assign as Admin", users_path(id: user.id, permissions: "up"), class: "btn btn-success" %>
+			<% else %>
+			<%= link_to "Remove as Admin", users_path(id: user.id, permissions: "down"), class: "btn btn-danger" %>
+		</p>
+		<% end %>
+	<% end %>
+
+<% else %>
+	<h1>EMPLOYEES ONLY!</h1>
+<% end %>
